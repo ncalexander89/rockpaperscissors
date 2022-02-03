@@ -1,83 +1,55 @@
-let playerScore = 0; // initial score Player
-let computerScore = 0; // initial score PC
+window.addEventListener('click', function (e) { // starts game once user clicks button
+    if (e.target.id === '') return; // if user does not click on button exit function
 
-for (let game = 0; game < 5; game++) { // Loop for 5 games
-
-    let playerInput = prompt ('Rock, Paper or Scissors?'); // player enters input
-
-    if (playerInput !== null) {
-    playerInput = playerInput.toLowerCase()
-    } // case insensitive
-
-    let computerNumber = Math.floor(Math.random()*3) + 1; // creates a random number between 1 and 3
-
-// function that allocates random number to choice
-    function computerPlay () {
+    function computerPlay() { // computer randomly selects
+        const computerNumber = Math.floor(Math.random()*3) + 1; 
         if (computerNumber === 1) {
-        return 'rock'
-        }
-        else if (computerNumber === 2) {
-        return 'scissors'
-        }
-        else {
-        return 'paper';
-        }
-    }   
-
-//function allocates decision to number
-    function playerSelection() {
-
-        if (playerInput === 'rock') {
-        return '1'
-        }
-        else if (playerInput === 'scissors') {
-        return '2'
-        }
-        else if (playerInput === 'paper') {
-        return '3'
+            return 'Rock'
+        } else if (computerNumber === 2) {
+            return 'Scissors'
+        } else {
+            return 'Paper';
         }
     }
 
-// playerSelection(playerInput);
-// console.log(playerInput);
-
-
-// function that determines winner
-        function playRound() {
-  
-            if ((playerSelection() - computerNumber === -1) || ((playerSelection() - computerNumber) === 2)) {
-        
-
-            playerScore++;
-
-            return('You win! '+ playerInput + ' beats ' + computerPlay());
-            }
-            else if (((playerSelection() - computerNumber === 1) || (playerSelection() - computerNumber) === -2)) {
-
-            // console.log(computerScore);
-            computerScore++;
-            // console.log(computerScore);
-
-            return('You lose! '+ computerPlay() + ' beats ' + playerInput);
-
- 
-
-            }
-            else  if ((playerSelection() - computerNumber === 0)) {
-            return('Tie game!')
-            }
-            else {
-            return('invalid option')
-            }
+    function playRound(playerSelection, computerSelection) { // rock paper scissors logic
+       while (i<=5) { 
+        if ((playerSelection === 'Rock' && computerSelection ==='Scissors') || (playerSelection === 'Paper' && computerSelection === 'Rock') || 
+        (playerSelection === 'Scissors' && computerSelection === 'Paper')) {
+        i++;
+        return `You win ${playerSelection} beats ${computerSelection}` 
         }
 
-
-
-    console.log(playRound());
-
-    console.log('player score = ',playerScore);
-    console.log('computer score = ',computerScore);
-    // alert(playRound()); // alerts winner
-// alert(computerScore);
-// alert(playerScore);
+        while (j<=5) {
+        if ((playerSelection === 'Rock' && computerSelection ==='Paper') || (playerSelection === 'Paper' && computerSelection === 'Scissors') || 
+        (playerSelection === 'Scissors' && computerSelection === 'Rock')) {
+        j++;
+            return `You lose ${computerSelection} beats ${playerSelection}` 
+        }
+    }
+        while (j<=5 && i<=5) {
+        } if (playerSelection === computerSelection) {
+        return 'Tie Game!'
+        }
+    }
 }
+
+    const computerSelection = computerPlay(); // stores return function into constant var
+    const playerSelection = e.target.id; //stores selection into constant var
+    
+    const result = document.querySelector('p')
+    result.textContent = playRound(playerSelection, computerSelection);
+
+    const score = document.createElement('div');
+    score.classList.add('score');
+    score.textContent = `Score: Player ${i} Computer ${j}`;
+
+    result.appendChild(score);
+    // console.log(result);
+    // console.log(playRound(playerSelection, computerSelection)); // logs winner of round using const variables of user and PC
+
+});
+
+let i=0;
+let j =0;
+// Display the running score, and announce a winner of the game once one player reaches 5 points.
