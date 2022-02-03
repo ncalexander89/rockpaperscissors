@@ -1,5 +1,5 @@
 window.addEventListener('click', function (e) { // starts game once user clicks button
-    if (e.target.id === '') return; // if user does not click on button exit function
+    if (e.target.id === ''|| i===2 || j===2) return; // if user does not click on button exit function
 
     function computerPlay() { // computer randomly selects
         const computerNumber = Math.floor(Math.random()*3) + 1; 
@@ -12,47 +12,64 @@ window.addEventListener('click', function (e) { // starts game once user clicks 
         }
     }
 
+
+
     function playRound(playerSelection, computerSelection) { // rock paper scissors logic
-       while (i<5 && j<5) {
-        if ((playerSelection === 'Rock' && computerSelection ==='Scissors') || (playerSelection === 'Paper' && computerSelection === 'Rock') || 
-        (playerSelection === 'Scissors' && computerSelection === 'Paper')) {
-        i++;
-        // if (i===5) {
-        //     return 'You Win'
-        // }
-        return `You win ${playerSelection} beats ${computerSelection}` 
-        }
-        // if (j===5) {
-        //     return 'You lose'
-        // }
-        if ((playerSelection === 'Rock' && computerSelection ==='Paper') || (playerSelection === 'Paper' && computerSelection === 'Scissors') || 
-        (playerSelection === 'Scissors' && computerSelection === 'Rock')) {
-        j++;
-            return `You lose ${computerSelection} beats ${playerSelection}` 
-        }
-    
-        if (playerSelection === computerSelection) {
-        return `${playerSelection} ties against ${computerSelection}`
-        }
-    
+        while (i<2 && j<2) {
+            if ((playerSelection === 'Rock' && computerSelection ==='Scissors') || (playerSelection === 'Paper' && computerSelection === 'Rock') || 
+            (playerSelection === 'Scissors' && computerSelection === 'Paper')) {
+                i++;
+                return `You win ${playerSelection} beats ${computerSelection}` 
+                }
+            if ((playerSelection === 'Rock' && computerSelection ==='Paper') || (playerSelection === 'Paper' && computerSelection === 'Scissors') || 
+            (playerSelection === 'Scissors' && computerSelection === 'Rock')) {
+                j++;
+                return `You lose ${computerSelection} beats ${playerSelection}` 
+                }
+            if (playerSelection === computerSelection) {
+                return `${playerSelection} ties against ${computerSelection}`
+                }
+            }
+        
+
     }
-}
-    if (i===5) {
-    alert ('Player Wins!')
-    } else if (j===5) {
-        alert('Computer Wins!')
-    }
-    
     const computerSelection = computerPlay(); // stores return function into constant var
     const playerSelection = e.target.id; //stores selection into constant var
+    
     const result = document.querySelector('p')
     result.textContent = playRound(playerSelection, computerSelection);
+    
     const score = document.createElement('div');
     score.classList.add('score');
     score.textContent = `Score: Player ${i} Computer ${j}`;
     result.appendChild(score);
-});
 
+    const winner = document.createElement('div');
+    winner.classList.add('winner');
+    result.appendChild(winner);
+
+    if (i===2) {
+        winner.textContent = 'Player Wins!';
+
+    } else if (j===2) {
+        // console.log(j);
+        winner.textContent = 'Computer Wins!';
+    }
+
+    if (i===2 || j===2) {
+    const playAgain = document.createElement('button');
+    playAgain.classList.add('playAgain');
+    playAgain.textContent = 'Play Again?';
+    result.appendChild(playAgain);
+
+    window.addEventListener('click', function (e) {
+        if (e.target.button === 'playAgain') {
+            let i=0;
+            let j=0;
+        }; // if user does not click on button exit function
+    });
+    }
+});
 
 let i=0;
 let j =0;
