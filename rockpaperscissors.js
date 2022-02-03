@@ -13,42 +13,46 @@ window.addEventListener('click', function (e) { // starts game once user clicks 
     }
 
     function playRound(playerSelection, computerSelection) { // rock paper scissors logic
-       while (i<=5) { 
+       while (i<5 && j<5) {
         if ((playerSelection === 'Rock' && computerSelection ==='Scissors') || (playerSelection === 'Paper' && computerSelection === 'Rock') || 
         (playerSelection === 'Scissors' && computerSelection === 'Paper')) {
         i++;
+        // if (i===5) {
+        //     return 'You Win'
+        // }
         return `You win ${playerSelection} beats ${computerSelection}` 
         }
-
-        while (j<=5) {
+        // if (j===5) {
+        //     return 'You lose'
+        // }
         if ((playerSelection === 'Rock' && computerSelection ==='Paper') || (playerSelection === 'Paper' && computerSelection === 'Scissors') || 
         (playerSelection === 'Scissors' && computerSelection === 'Rock')) {
         j++;
             return `You lose ${computerSelection} beats ${playerSelection}` 
         }
-    }
-        while (j<=5 && i<=5) {
-        } if (playerSelection === computerSelection) {
-        return 'Tie Game!'
+    
+        if (playerSelection === computerSelection) {
+        return `${playerSelection} ties against ${computerSelection}`
         }
+    
     }
 }
-
+    if (i===5) {
+    alert ('Player Wins!')
+    } else if (j===5) {
+        alert('Computer Wins!')
+    }
+    
     const computerSelection = computerPlay(); // stores return function into constant var
     const playerSelection = e.target.id; //stores selection into constant var
-    
     const result = document.querySelector('p')
     result.textContent = playRound(playerSelection, computerSelection);
-
     const score = document.createElement('div');
     score.classList.add('score');
     score.textContent = `Score: Player ${i} Computer ${j}`;
-
     result.appendChild(score);
-    // console.log(result);
-    // console.log(playRound(playerSelection, computerSelection)); // logs winner of round using const variables of user and PC
-
 });
+
 
 let i=0;
 let j =0;
