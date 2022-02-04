@@ -63,9 +63,12 @@ window.addEventListener('click', function (e) { // starts game once user clicks 
     result.appendChild(playAgain);
 
     window.addEventListener('click', function (e) {
-        if (e.target.button === 'playAgain') {
-            let i=0;
-            let j=0;
+        if (e.target.className === 'playAgain') {
+             i=0;
+             j=0;
+             winner.textContent = '';
+             result.textContent = '';
+             playAgain.textContent = '';
         }; // if user does not click on button exit function
     });
     }
